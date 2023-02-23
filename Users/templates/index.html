@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Author</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in books %}
+        <tr>
+          <td>{{ book.id}}</td>
+          <td>{{ book.name }}</td>
+          <td>{{ book.qty}}</td>
+          <td>{{book.price}}</td>
+          <td>{{book.author}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  {% if books.has_other_pages %}
+    <ul class="pagination">
+      {% if books.has_previous %}
+        <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+      {% endif %}
+      {% for i in books.paginator.page_range %}
+        {% if users.number == i %}
+          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+          <li><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if books.has_next %}
+        <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+      {% endif %}
+    </ul>
+  {% endif %}
+
+  {% endblock %}

@@ -1,0 +1,28 @@
+{% load static %}
+<html>
+    <head>
+        <title>Library page</title>
+        <link href="{% static 'css\bootstrap.min.css '%}" rel="stylesheet">
+
+    </head>
+    <style>
+        .required:before {
+    content:" *";
+    color: red;
+  }
+    </style>
+    <body>
+        <h2>Library Application</h2><hr>
+        <form action="{% url 'home_page' %}"  method="post">
+            {% csrf_token %}
+              {{form.as_p}}     
+            <button type="submit" class="btn-btn-primary">submit</button>
+           
+        </form>
+      <!-- <a href="/books/">show Books</a>  -->
+      <a href="{% url 'all_active_books' %}">show Active Books</a> 
+      <a href="{% url 'all_inactive_books' %}">Show Inactive Books</a>
+
+    </body>
+
+</html>
